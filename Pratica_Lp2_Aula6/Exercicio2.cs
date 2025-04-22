@@ -12,7 +12,6 @@ namespace Pratica_Lp2_Aula6
 {
     public partial class Exercicio2 : Form
     {
-        double numeroH;
         double numeroN;
 
         public Exercicio2()
@@ -23,7 +22,7 @@ namespace Pratica_Lp2_Aula6
         // validação
         private void txtNumeroN_Validated(object sender, EventArgs e)
         {
-            if(!double.TryParse(txtNumeroN.Text, out numeroN))
+            if(!double.TryParse(txtNumeroN.Text, out numeroN) || numeroN <= 0)
             {
                 MessageBox.Show("Digite um número válido!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtNumeroN.Clear();
@@ -43,13 +42,15 @@ namespace Pratica_Lp2_Aula6
         private void btnCalcularH_Click(object sender, EventArgs e)
         {
             txtResultado.Clear();
-            numeroN = 1;
-            
+            numeroN = Convert.ToDouble(txtNumeroN.Text);
+            double numeroH = 0;
+
             for (int i = 1; i <= numeroN; i++)
             {
-                txtResultado.Text += numeroH + (1.0 / (numeroN));
-                numeroN++;
+                numeroH += (1.0 / i);
             }
+
+            txtResultado.Text += numeroH;
         }
         
     }
